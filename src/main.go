@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"os"
@@ -38,10 +39,12 @@ func setupHttpServer(portNumber string) {
 }
 
 func main() {
-	// TODO get port number from command line
-	// if no port number is defined set default port number
-	var defaultPortNumber string = "8000"
+	// Get port number from command line
+	// If no port number is defined set default port number
+
+	portPtr := flag.String("port", "8000", "Port to start the server on")
+	flag.Parse()
 	fmt.Println("Starting program")
 	logPid()
-	setupHttpServer(defaultPortNumber)
+	setupHttpServer(*portPtr)
 }
